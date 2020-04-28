@@ -3,9 +3,9 @@ version: 0.0.1
 # description:
 # keywords:
 #   -
-# home: https://github.com/micalgenus/etf
+# home: https://github.com/micalgenus/temporary-web-hosting-server
 # sources:
-#   - https://github.com/micalgenus/etf
+#   - https://github.com/micalgenus/temporary-web-hosting-server
 maintainers:
   - name: micalgenus
     email: micalgenus@gmail.com
