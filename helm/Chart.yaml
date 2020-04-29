@@ -1,0 +1,15 @@
+name: hosting
+version: 0.0.1
+# description:
+# keywords:
+#   -
+# home: https://github.com/micalgenus/temporary-web-hosting-server
+# sources:
+#   - https://github.com/micalgenus/temporary-web-hosting-server
+maintainers:
+  - name: micalgenus
+    email: micalgenus@gmail.com
+    url: https://micalgenus.github.io/
+# icon:
+appVersion: 0.0.1
+# tillerVersion:
