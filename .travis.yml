@@ -12,6 +12,10 @@ cache:
 services:
   - docker
 
+branches:
+  only:
+    - master
+
 env:
   global:
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
@@ -30,12 +34,12 @@ before_install:
     fi
   - export PATH=$PATH:$HOME/.helm/bin
 
+  # Create gcloud credential file
+  - node ./tools/gcloud.key.js > ./gcloud.key.json
+
   # Install Google Cloud SDK
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
   - source $HOME/google-cloud-sdk/path.bash.inc
-
-  # Create gcloud credential file
-  - node ./tools/gcloud.key.js > ./gcloud.key.json
 
 install:
   - helm repo add micalgenus-gcs gs://micalgenus/chart
