@@ -22,6 +22,9 @@ env:
     - GOOGLE_APPLICATION_CREDENTIALS="$PWD/gcloud.key.json"
 
 before_install:
+  # Create gcloud credential file
+  - openssl aes-256-cbc -K $GCS_AES_KEY -iv $GCS_AES_IV -in gcloud.key.json.enc -out gcloud.key.json -d
+
   - | # Install Helm
     if [ ! -d "$HOME/.helm/bin" ]; then
       rm -rf "$HOME/.helm"
@@ -33,9 +36,6 @@ before_install:
       $HOME/.helm/bin/helm plugin install https://github.com/hayorov/helm-gcs
     fi
   - export PATH=$PATH:$HOME/.helm/bin
-
-  # Create gcloud credential file
-  - node ./tools/gcloud.key.js > ./gcloud.key.json
 
   # Install Google Cloud SDK
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
