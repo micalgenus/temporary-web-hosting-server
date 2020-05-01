@@ -59,3 +59,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
+
+after_deploy:
+  - wget $JENKINS_TRIGGER_URL?token=$JENKINS_TRIGGER_TOKEN
