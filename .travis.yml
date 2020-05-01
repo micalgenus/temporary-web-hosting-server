@@ -61,4 +61,4 @@ deploy:
       branch: master
 
 after_deploy:
-  - curl -X $JENKINS_TRIGGER_URL?token=$JENKINS_TRIGGER_TOKEN --user $JENKINS_USER:$JEKNINS_USER_TOKEN
+  - curl -X POST $JENKINS_TRIGGER_URL?token=$JENKINS_TRIGGER_TOKEN --user $JENKINS_USER:$JEKNINS_USER_TOKEN
