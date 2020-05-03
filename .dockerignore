@@ -1,0 +1,18 @@
+# directory
+.github
+helm
+dist
+node_modules
+.git
+
+# file
+.eslintrc
+.git*
+.prettierrc
+.travis.yml
+gcloud*
+LICENSE
+README.md
+tsconfig.json
+Dockerfile
+.dockerignore
