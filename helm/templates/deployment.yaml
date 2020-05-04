@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hosting
+spec:
+  replicas: {{ .Values.backend.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: hosting
+  template:
+    metadata:
+      labels:
+        app: hosting
+    spec:
+        containers:
+        - image: micalgenus/hosting:{{ .Chart.AppVersion }}
+          imagePullPolicy: Always
+          name: hosting
+          # env:
+          #   - name: MYSQL_HOST
+          #     value: etf-backend-mysql.{{ .Release.Namespace }}.svc.cluster.local
+          #   - name: MYSQL_PORT
+          #     value: {{ 3306 | quote }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hosting
+spec:
+  selector:
+    app: hosting
+  ports:
+    - name: express
+      port: 3000
+      targetPort: 3000
