@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hosting
 spec:
-  replicas: {{ .Values.backend.deployment.replicas }}
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       app: hosting
