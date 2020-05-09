@@ -16,3 +16,16 @@ spec:
         - image: redis
           imagePullPolicy: Always
           name: hosting-redis
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hosting-redis
+spec:
+  selector:
+    app: hosting-redis
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379

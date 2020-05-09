@@ -16,11 +16,11 @@ spec:
         - image: micalgenus/hosting:{{ .Chart.AppVersion }}
           imagePullPolicy: Always
           name: hosting
-          # env:
-          #   - name: MYSQL_HOST
-          #     value: etf-backend-mysql.{{ .Release.Namespace }}.svc.cluster.local
-          #   - name: MYSQL_PORT
-          #     value: {{ 3306 | quote }}
+          env:
+            - name: MYSQL_HOST
+              value: hosting-redis.{{ .Release.Namespace }}.svc.cluster.local
+            - name: MYSQL_PORT
+              value: {{ 6379 | quote }}
 
 ---
 apiVersion: v1
