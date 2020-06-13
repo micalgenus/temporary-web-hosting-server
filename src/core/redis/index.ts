@@ -13,7 +13,7 @@ class RedisClient {
   constructor({ host, port, inMemory }: RedisOption = { port: 6379 }) {
     const redisOption = {};
 
-    this.client = (inMemory ? redisMock : redis).createClient(port, host, redisOption);
+    this.client = (inMemory ? redisMock : redis).createClient(port, host, redisOption) as redis.RedisClient;
   }
 
   public async set(key: string, value: string): Promise<'OK'> {

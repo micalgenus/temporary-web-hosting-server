@@ -1,4 +1,4 @@
-import redis from '@/redis';
+import redis from '@/core/redis';
 import moment from 'moment';
 import { assert } from 'chai';
 
