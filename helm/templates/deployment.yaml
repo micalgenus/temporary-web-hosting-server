@@ -21,6 +21,12 @@ spec:
               value: hosting-redis.{{ .Release.Namespace }}.svc.cluster.local
             - name: MYSQL_PORT
               value: {{ 6379 | quote }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
 
 ---
 apiVersion: v1
