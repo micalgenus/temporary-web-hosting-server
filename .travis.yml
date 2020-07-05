@@ -49,7 +49,7 @@ before_script:
 
 script:
   - helm package hosting
-  - docker build -t $DOCKER_USERNAME/hosting .
+  - yarn docker-build
 
 before_deploy:
   - mkdir -p $HOME/.config/helm && cp $HOME/.helm/repository/repositories.yaml $HOME/.config/helm/repositories.yaml
@@ -61,7 +61,7 @@ deploy:
     on:
       branch: master
   - provider: script
-    script: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push $DOCKER_USERNAME/hosting && docker logout
+    script: yarn docker-push
     skip_cleanup: true
     on:
       branch: master
