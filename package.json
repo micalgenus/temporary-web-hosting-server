@@ -9,7 +9,7 @@
     "test": "NODE_ENV=test mocha -t 10000 -r ./src/test/utils/babel.js ./src/test/**/*.test.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
-    "type-check": "tsc --noEmit **/*.ts --esModuleInterop",
+    "type-check": "tsc -p ./tsconfig.json --noEmit --esModuleInterop",
     "docker-build": "docker build -t $DOCKER_USERNAME/hosting:$npm_package_version .",
     "docker-push": "docker push $DOCKER_USERNAME/hosting:$npm_package_version"
   },
