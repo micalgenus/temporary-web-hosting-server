@@ -61,7 +61,7 @@ deploy:
     on:
       branch: master
   - provider: script
-    script: yarn docker-push
+    script: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && yarn docker-push && docker logout
     skip_cleanup: true
     on:
       branch: master
