@@ -18,6 +18,7 @@ app.post('/ping', (req, res) => {
 });
 
 app.post('/upload/text', async (req, res, next) => {
+  console.log('body:', req.body);
   try {
     const { namespace, password } = await getUniqueRandomHash();
     redis.hmset(namespace, { [p.resolve('/' + req.body.path)]: req.body.text });
