@@ -1,6 +1,6 @@
 {
-  "presets": ["@babel/typescript", ["@babel/env", { "targets": { "node": "12" } }]],
+  "presets": ["@babel/typescript", ["@babel/env", { "targets": { "node": "12" } }], ["minify", { "builtIns": false, "evaluate": false, "mangle": false }]],
   "plugins": [["module-resolver", { "root": ["./src"], "alias": { "@": "./src" } }]],
-  "sourceMaps": true,
+  "sourceMaps": "both",
   "comments": false
 }
