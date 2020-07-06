@@ -22,4 +22,28 @@ describe('Redis', () => {
 
     assert.equal(result, testValue);
   });
+
+  it('Expire', async () => {
+    const result = await redis.expire(testKey, 1);
+
+    assert.isTrue(result);
+    await new Promise((resolve) => setTimeout(() => resolve(null), 1000));
+  });
+
+  it('Exists', async () => {
+    const result = await redis.exists(testKey);
+
+    assert.isFalse(result);
+  });
+
+  describe('HMSET', async () => {
+    it('key = undefined', async () => {
+      try {
+        await redis.hmset(undefined, { testKey });
+        assert.fail('Error');
+      } catch (err) {
+        assert.equal(err.message, 'key is empty: undefined');
+      }
+    });
+  });
 });

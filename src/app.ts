@@ -6,6 +6,7 @@ import redis from '@/core/redis';
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // For kubernetes
 app.get('/healthz', (req, res) => {
@@ -18,10 +19,14 @@ app.post('/ping', (req, res) => {
 });
 
 app.post('/upload/text', async (req, res, next) => {
-  console.log('body:', req.body);
+  const { path, text } = req.body;
+  if (!path || !text) {
+    return res.status(500).send('Invalid url');
+  }
+
   try {
     const { namespace, password } = await getUniqueRandomHash();
-    redis.hmset(namespace, { [p.resolve('/' + req.body.path)]: req.body.text });
+    redis.hmset(namespace, { [p.resolve('/' + path)]: text, password });
 
     res.json({ namespace, password });
   } catch (err) {
@@ -36,6 +41,10 @@ app.get('/download/:namespace/:path(*)', async (req, res, next) => {
 
     const texts = await redis.hmget(namespace, findPath);
 
+    if (!texts[findPath]) {
+      res.status(404);
+    }
+
     res.send(texts[findPath]);
   } catch (err) {
     next(err);
@@ -43,7 +52,7 @@ app.get('/download/:namespace/:path(*)', async (req, res, next) => {
 });
 
 app.use(function (err, req, res, next) {
-  console.error(err.stack);
+  console.error(err.stack, err, res, next);
   res.status(500).send(process.env.NODE_ENV === 'test' ? JSON.stringify(err.stack) : '');
 });
 

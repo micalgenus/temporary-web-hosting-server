@@ -25,12 +25,12 @@ class RedisClient {
   }
 
   public async expire(key: string, seconds: number = 0) {
-    return new Promise((resolve, rejects) => {
+    return new Promise<boolean>((resolve, rejects) => {
       this.client.expire(key, getExpireSeconds(seconds), (err, reply) => {
         if (err) {
           rejects(err);
         } else {
-          resolve(reply);
+          resolve(!!reply);
         }
       });
     });
@@ -75,6 +75,9 @@ class RedisClient {
   }
 
   public async hmset(key: string, data: { [field: string]: string }, expireSeconds: number = MAX_SECONDS): Promise<'OK'> {
+    if (!key) {
+      throw new Error('key is empty: ' + key);
+    }
     return new Promise<'OK'>((resolve, rejects) => {
       this.client.hmset(
         key,
