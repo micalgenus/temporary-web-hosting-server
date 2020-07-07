@@ -55,13 +55,10 @@ app.post('/upload/file', upload.single('file'), async (req, res, next) => {
 app.get('/download/:namespace/:path(*)', async (req, res, next) => {
   try {
     const { namespace, path } = req.params;
-    console.log(namespace, path);
     const findPath = p.resolve('/' + path);
 
     const texts = await redis.hmget(namespace, findPath, 'type');
     const { type } = texts;
-
-    console.log(texts);
 
     if (!texts[findPath]) {
       res.status(404);

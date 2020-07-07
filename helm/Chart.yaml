@@ -1,5 +1,5 @@
 name: hosting
-version: 0.0.1
+version: 0.1.0
 # description:
 # keywords:
 #   -
@@ -11,5 +11,5 @@ maintainers:
     email: micalgenus@gmail.com
     url: https://micalgenus.github.io/
 # icon:
-appVersion: 0.0.1
+appVersion: 0.1.0
 # tillerVersion:
