@@ -67,15 +67,18 @@ app.get('/download/:namespace/:path(*)', async (req, res, next) => {
     let text = texts[findPath];
     switch (type) {
       case 'text':
+        res.send(text);
         break;
       case 'file':
-        text = new Buffer(text, 'base64').toString('ascii');
+        res.setHeader('Content-disposition', 'attachment; filename=' + path);
+        res.setHeader('Content-type', 'application/octet-stream');
+        res.write(Buffer.from(text, 'base64'));
         break;
       default:
         throw new Error('Invalid item');
     }
 
-    res.send(text);
+    res.end();
   } catch (err) {
     next(err);
   }
